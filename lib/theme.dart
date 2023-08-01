@@ -32,6 +32,25 @@ abstract class AppColors {
   static const bottomGradient = Color(0xFFFFB344);
 }
 
+
+
+/// Global reference to application [TextStyle]s.
+abstract class AppTextStyle {
+  static const textStyleBoldMedium = Typogaphy.medium;
+  static const textStyleBold = Typogaphy.semiBold;
+  static const textStyleSmallBold = Typogaphy.semiBold.copyWith(fontSize: 13);
+  static const textStyleFaded =
+      Typogaphy.light.copyWith(color: AppColors.faded);
+  static const textStyleFadedSmall =
+      Typogaphy.light.copyWith(color: AppColors.faded, fontSize: 11);
+  static const textStyleFadedSmallBold =
+      Typogaphy.semiBold.copyWith(color: AppColors.faded, fontSize: 11);
+  static const textStyleLight = Typogaphy.thin;
+  static const textStyleAction =
+      Typogaphy.semiBold.copyWith(color: AppColors.secondary);
+}
+
+
 /// Global reference to application [TextStyle]s.
 abstract class AppTextStyle {
   /// A medium bold text style.
@@ -76,7 +95,6 @@ class AppTheme {
   final _darkBase = ThemeData.dark();
   final _lightBase = ThemeData.light();
 
-  /// Dark theme and its settings.
   ThemeData get darkTheme => _darkBase.copyWith(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         backgroundColor: AppColors.dark,
@@ -120,21 +138,10 @@ class AppTheme {
             overlayColor: MaterialStateProperty.all<Color>(
               AppColors.grey,
             ),
-          ),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all<Color>(
-              AppColors.secondary,
-            ),
-            overlayColor: MaterialStateProperty.all<Color>(
-              AppColors.grey,
-            ),
             textStyle: MaterialStateProperty.all<TextStyle>(
-              const TextStyle(
-                color: AppColors.secondary,
+              Typogaphy.semiBold.copyWith(
+                color: AppColors.primaryText,
                 fontSize: 16,
-                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -189,22 +196,11 @@ class AppTheme {
             overlayColor: MaterialStateProperty.all<Color>(
               AppColors.ligthGrey,
             ),
-          ),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all<Color>(
-              AppColors.secondary,
-            ),
             textStyle: MaterialStateProperty.all<TextStyle>(
-              const TextStyle(
-                color: AppColors.secondary,
+              Typogaphy.semiBold.copyWith(
+                color: AppColors.primaryText,
                 fontSize: 16,
-                fontWeight: FontWeight.w600,
               ),
-            ),
-            overlayColor: MaterialStateProperty.all<Color>(
-              AppColors.ligthGrey,
             ),
           ),
         ),
