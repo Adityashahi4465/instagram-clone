@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'core/constants/typography.dart';
+
 /// Global reference to application colors.
 abstract class AppColors {
   /// Dark color.
-  static const dark = Colors.black;
+  static const dark = Color(0xFF0c1822);
 
   static const light = Color(0xFFFAFAFA);
 
@@ -14,16 +16,16 @@ abstract class AppColors {
   static const primaryText = Colors.white;
 
   /// Secondary color.
-  static const secondary = Color(0xFF0095F6);
+  static const secondary = Color(0xFF024daa);
 
   /// Color to use for favorite icons (indicating a like).
   static const like = Colors.red;
 
   /// Grey faded color.
-  static const faded = Colors.grey;
+  static const faded = Color(0xFF3b506a);
 
   /// Light grey color
-  static const ligthGrey = Color(0xFFEEEEEE);
+  static const lightGrey = Color(0xFFEEEEEE);
 
   /// Top gradient color used in various UI components.
   static const topGradient = Color(0xFFE60064);
@@ -32,56 +34,27 @@ abstract class AppColors {
   static const bottomGradient = Color(0xFFFFB344);
 }
 
-
-
 /// Global reference to application [TextStyle]s.
-abstract class AppTextStyle {
-  static const textStyleBoldMedium = Typogaphy.medium;
-  static const textStyleBold = Typogaphy.semiBold;
-  static const textStyleSmallBold = Typogaphy.semiBold.copyWith(fontSize: 13);
-  static const textStyleFaded =
-      Typogaphy.light.copyWith(color: AppColors.faded);
-  static const textStyleFadedSmall =
-      Typogaphy.light.copyWith(color: AppColors.faded, fontSize: 11);
-  static const textStyleFadedSmallBold =
-      Typogaphy.semiBold.copyWith(color: AppColors.faded, fontSize: 11);
-  static const textStyleLight = Typogaphy.thin;
-  static const textStyleAction =
-      Typogaphy.semiBold.copyWith(color: AppColors.secondary);
-}
-
 
 /// Global reference to application [TextStyle]s.
 abstract class AppTextStyle {
   /// A medium bold text style.
-  static const textStyleBoldMedium = TextStyle(
-    fontWeight: FontWeight.w600,
-  );
+  static const textStyleBoldMedium = Typogaphy.medium;
 
   /// A bold text style.
-  static const textStyleBold = TextStyle(
-    fontWeight: FontWeight.bold,
-  );
+  static const textStyleBold = Typogaphy.bold;
 
-  static const textStyleSmallBold = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 13,
-  );
+  static const textStyleSemiBold = Typogaphy.semiBold;
+  static const textStyleRegular = Typogaphy.regular;
+  static const textStyleThin = Typogaphy.thin;
+  static const textStyleLight = Typogaphy.light;
 
   /// A faded text style. Uses [AppColors.faded].
   static const textStyleFaded =
       TextStyle(color: AppColors.faded, fontWeight: FontWeight.w400);
 
   /// A faded text style. Uses [AppColors.faded].
-  static const textStyleFadedSmall = TextStyle(
-      color: AppColors.faded, fontWeight: FontWeight.w400, fontSize: 11);
-
-  /// A faded text style. Uses [AppColors.faded].
-  static const textStyleFadedSmallBold = TextStyle(
-      color: AppColors.faded, fontWeight: FontWeight.w500, fontSize: 11);
-
-  /// Light text style.
-  static const textStyleLight = TextStyle(fontWeight: FontWeight.w300);
+  static const textStyleFadedSemiBold = Typogaphy.semiBold;
 
   /// Action text
   static const textStyleAction = TextStyle(
@@ -97,7 +70,6 @@ class AppTheme {
 
   ThemeData get darkTheme => _darkBase.copyWith(
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: AppColors.dark,
         scaffoldBackgroundColor: AppColors.dark,
         appBarTheme: _darkBase.appBarTheme.copyWith(
           backgroundColor: AppColors.dark,
@@ -127,6 +99,43 @@ class AppTheme {
             ),
           ),
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: AppTextStyle.textStyleFadedSemiBold,
+          border: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColors.grey,
+              width: 0.8,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColors.faded,
+              width: 1.3,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColors.faded,
+              width: 1.3,
+            ),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red.shade50,
+              width: 0.8,
+            ),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red,
+              width: 1.3,
+            ),
+          ),
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(
@@ -139,7 +148,7 @@ class AppTheme {
               AppColors.grey,
             ),
             textStyle: MaterialStateProperty.all<TextStyle>(
-              Typogaphy.semiBold.copyWith(
+              AppTextStyle.textStyleSemiBold.copyWith(
                 color: AppColors.primaryText,
                 fontSize: 16,
               ),
@@ -147,13 +156,13 @@ class AppTheme {
           ),
         ),
         brightness: Brightness.dark,
-        colorScheme:
-            _darkBase.colorScheme.copyWith(secondary: AppColors.secondary),
+        colorScheme: _darkBase.colorScheme
+            .copyWith(secondary: AppColors.secondary)
+            .copyWith(background: AppColors.dark),
       );
 
   ThemeData get lightTheme => _lightBase.copyWith(
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: AppColors.light,
         scaffoldBackgroundColor: AppColors.light,
         appBarTheme: _lightBase.appBarTheme.copyWith(
           backgroundColor: AppColors.light,
@@ -171,7 +180,7 @@ class AppTheme {
           style: ButtonStyle(
             side: MaterialStateProperty.all(
               const BorderSide(
-                color: AppColors.ligthGrey,
+                color: AppColors.lightGrey,
               ),
             ),
             foregroundColor: MaterialStateProperty.all<Color>(
@@ -181,7 +190,44 @@ class AppTheme {
               AppColors.light,
             ),
             overlayColor: MaterialStateProperty.all<Color>(
-              AppColors.ligthGrey,
+              AppColors.lightGrey,
+            ),
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: AppTextStyle.textStyleFadedSemiBold,
+          border: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColors.grey,
+              width: 0.8,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColors.faded,
+              width: 1.3,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColors.dark,
+              width: 1.3,
+            ),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.red,
+              width: 0.8,
+            ),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red.shade600,
+              width: 1.3,
             ),
           ),
         ),
@@ -194,7 +240,7 @@ class AppTheme {
               AppColors.primaryText,
             ),
             overlayColor: MaterialStateProperty.all<Color>(
-              AppColors.ligthGrey,
+              AppColors.lightGrey,
             ),
             textStyle: MaterialStateProperty.all<TextStyle>(
               Typogaphy.semiBold.copyWith(
@@ -205,7 +251,8 @@ class AppTheme {
           ),
         ),
         brightness: Brightness.light,
-        colorScheme:
-            _lightBase.colorScheme.copyWith(secondary: AppColors.secondary),
+        colorScheme: _lightBase.colorScheme
+            .copyWith(secondary: AppColors.secondary)
+            .copyWith(background: AppColors.light),
       );
 }
