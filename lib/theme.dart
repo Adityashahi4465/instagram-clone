@@ -22,7 +22,7 @@ abstract class AppColors {
   static const like = Colors.red;
 
   /// Grey faded color.
-  static const faded = Color(0xFF3b506a);
+  static const faded = Color.fromARGB(255, 59, 80, 106);
 
   /// Light grey color
   static const lightGrey = Color(0xFFEEEEEE);
@@ -83,9 +83,17 @@ class AppTheme {
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(34),
+              ),
+            ),
+            minimumSize: MaterialStateProperty.all(
+              Size(400, 50),
+            ),
             side: MaterialStateProperty.all(
               const BorderSide(
-                color: AppColors.grey,
+                color: AppColors.faded,
               ),
             ),
             foregroundColor: MaterialStateProperty.all<Color>(
@@ -96,6 +104,12 @@ class AppTheme {
             ),
             overlayColor: MaterialStateProperty.all<Color>(
               AppColors.grey,
+            ),
+            textStyle: MaterialStateProperty.all<TextStyle>(
+              AppTextStyle.textStyleSemiBold.copyWith(
+                color: AppColors.primaryText,
+                fontSize: 16,
+              ),
             ),
           ),
         ),
@@ -118,7 +132,7 @@ class AppTheme {
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(
               color: AppColors.faded,
-              width: 1.3,
+              width: 1.8,
             ),
             borderRadius: BorderRadius.circular(18),
           ),
@@ -145,7 +159,7 @@ class AppTheme {
               AppColors.primaryText,
             ),
             overlayColor: MaterialStateProperty.all<Color>(
-              AppColors.grey,
+              AppColors.grey.withOpacity(0.2),
             ),
             textStyle: MaterialStateProperty.all<TextStyle>(
               AppTextStyle.textStyleSemiBold.copyWith(

@@ -9,12 +9,15 @@ class LogicScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: TextButton(
-          onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: ((context) => const RegistrationScreen()),
-            ),
-          ),
+          onPressed: () {
+            print('register');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: ((context) => const RegistrationScreen()),
+              ),
+            );
+          },
           child: const Text('register'),
         ),
       ),

@@ -1,34 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/constants/pages_constant.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
- final PageController _pageController = PageController(initialPage: 0);
+import '../../../core/constants/pages_constant.dart';
+import '../controller/auth_controller.dart';
 
-  void nextPage() {
-    _pageController.nextPage(
-        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-  }
-  void previousPage() {
-    _pageController.previousPage(
-        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-  }
-
-
-class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({super.key});
+class RegistrationScreen extends ConsumerWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegistrationScreen> createState() => _RegistrationScreenState();
-}
-
-class _RegistrationScreenState extends State<RegistrationScreen> {
- 
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final pageController = ref.watch(pageControllerProvider);
     return Scaffold(
-      body: PageView.builder(
-        controller: _pageController,
-        itemCount: registrationPages.length,
-        itemBuilder: (context, index) => registrationPages[index],
+      body: PageView(
+        controller: pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: registrationPages,
       ),
     );
   }
