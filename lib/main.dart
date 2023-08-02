@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:instagram_clone/features/auth/screen/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:instagram_clone/theme.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -9,7 +11,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,11 +25,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      title: 'Instagram Clone',
+      themeMode: ThemeMode.dark,
+      darkTheme: AppTheme().darkTheme,
+      theme: AppTheme().lightTheme,
       home: const LogicScreen(),
     );
   }
