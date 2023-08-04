@@ -8,7 +8,7 @@ import '../../features/auth/widgets/password_input_screen.dart';
 
 List<Widget> registrationPages = [
   const NameInputScreen(),
-  const PasswordInputScreen(),
+  PasswordInputScreen(),
   const AgeInputScreen(),
   const UsernameInputScreen(),
   const EmailInputScreen(),
