@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/common/custom_button.dart';
 import '../../../core/common/heading_text.dart';
+import '../../../models/usermodel.dart';
 import '../../../theme.dart';
 import '../controller/auth_controller.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +17,7 @@ class AgeInputScreen extends ConsumerStatefulWidget {
 
 class _AgeInputScreenState extends ConsumerState<AgeInputScreen> {
   DateTime _selectedDate = DateTime.now();
-
+ 
   Future<void> selectDate() async {
     final pickedDate = await showDatePicker(
       context: context,
@@ -48,6 +49,8 @@ class _AgeInputScreenState extends ConsumerState<AgeInputScreen> {
   @override
   Widget build(BuildContext context) {
     final pageController = ref.watch(pageControllerProvider);
+    final formData = ref.watch(signUpFormDataProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -130,7 +133,21 @@ class _AgeInputScreenState extends ConsumerState<AgeInputScreen> {
                     height: 24,
                   ),
                   CustomButton(
+                    label: 'Next',
                     onTap: () {
+                     formData.update((state) => UserModel(
+                                uid: formData.state.uid,
+                                fullName: formData.state.fullName,
+                                birthDay: _selectedDate,
+                                email: formData.state.email,
+                                userName: formData.state.userName,
+                                followers: [],
+                                following: [],
+                                profilePic: '',
+                                bio: '',
+                                link: '',
+                                joinedAt: DateTime.now(),
+                              ));
                       pageController.nextPage(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut);

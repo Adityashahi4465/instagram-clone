@@ -6,12 +6,15 @@ class CustomTextField extends StatefulWidget {
   final String label;
   final double height;
   final bool isPassword;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   const CustomTextField({
     super.key,
     required this.label,
     required this.height,
     required this.isPassword,
+    required this.validator, required this.controller,
   });
 
   @override
@@ -24,10 +27,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: widget.height,
-      child: TextField(
+      child: TextFormField(
+        controller: widget.controller,
         autofocus: true,
         textAlignVertical: TextAlignVertical.top,
-        obscureText: isObscure,
+        obscureText: !widget.isPassword ? false : isObscure,
+        validator: widget.validator,
         decoration: InputDecoration(
             label: Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
