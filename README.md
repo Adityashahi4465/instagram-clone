@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-# Youtube Course:  [Watch Course By Clicking here](https://www.youtube.com/watch?v=hUFyTZdUIpg&list=PLMv8gnToZ4wHeqIUawVGWrp7dbn5U3Dx0&index=1&t=960s)
+# Youtube Course Link :  [Click here to watch complete course for free](https://www.youtube.com/watch?v=hUFyTZdUIpg&list=PLMv8gnToZ4wHeqIUawVGWrp7dbn5U3Dx0&index=1&t=960s)
 
 ## Getting Started
 
